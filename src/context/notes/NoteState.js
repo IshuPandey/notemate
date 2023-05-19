@@ -1,7 +1,6 @@
 import NoteContext from "./NoteContext";
 import { useState } from "react";
 
-
 const NoteState = (props) => {
     const host = 'http://localhost:5000'
     const notesInitial = []
@@ -35,7 +34,7 @@ const getNote = async (id, title, description, tag) => {
 
     // Add a Note
     const addNote = async(title, description, tag) => {
-        // TODO: API Call
+
 
           //API CALL
 
