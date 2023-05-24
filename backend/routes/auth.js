@@ -18,12 +18,12 @@ router.post(
     body("password", "Password must be of length 8").isLength({ min: 8 }),
   ],
   async (req, res) => {
-
+    let success=false;
     //If errors, return errors and bad request
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ success,errors: errors.array() });
     }
 
 
@@ -31,7 +31,7 @@ router.post(
     try {
       let user = await User.findOne({ email: req.body.email });
       if (user) {
-        return res.status(400).json({ error: "Email already exist" });
+        return res.status(400).json({ success,error: "Email already exist" });
       }
       const salt=await bcrypt.genSalt(10);
      const secPass=await bcrypt.hash(req.body.password,salt);
@@ -53,7 +53,8 @@ router.post(
       const jwtData=jwt.sign(data,jwt_secret);
       console.log(jwtData);
       // res.json(user);
-      res.json({jwtData})
+        success=true;
+      res.json({success,jwtData})
     }
      catch (error) {
       console.error(error.message);
@@ -121,7 +122,7 @@ router.post(
     "/getuser", fetchUser,async (req, res) => {
 
   try {
-    userId=req.user.id;
+    const userId=req.user.id;
     const user=await User.findById(userId).select("-password")
     res.send(user);
   }

@@ -21,12 +21,13 @@ const Login = (props) => {
         console.log(json);
         if (json.success){
             // Save the auth token and redirect
-            localStorage.setItem('token', json.authtoken); 
-            navigate("/");
+            localStorage.setItem('token', json.jwtData);
+            navigate("/home");
+            props.showAlert("Logged in successfully","success");
 
         }
         else{
-            alert("Invalid credentials");
+            props.showAlert(json.error,'danger');
         }
     }
 
@@ -36,27 +37,11 @@ const Login = (props) => {
 
     return (
         <div className='container my-5 d-flex justify-content-center justify-self-center'>
-            {/* <form  onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email address</label>
-                    <input type="email" className="form-control" value={credentials.email} onChange={onChange} id="email" name="email" aria-describedby="emailHelp" />
-                    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" value={credentials.password} onChange={onChange} name="password" id="password" />
-                </div>
-
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form> */}
-
-
-
-
             
-    <form class="form" onSubmit={handleSubmit}>
-       <p class="form-title">Sign in to your account</p>
-        <div class="input-container">
+            
+    <form className="form" onSubmit={handleSubmit}>
+       <p className="form-title">Sign in to your account</p>
+        <div className="input-container">
           <input placeholder="Enter email" type="email" value={credentials.email} onChange={onChange} id="email" name="email"/>
           <span>
             <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +49,7 @@ const Login = (props) => {
             </svg>
           </span>
       </div>
-      <div class="input-container">
+      <div className="input-container">
           <input placeholder="Enter password" type="password" value={credentials.password} onChange={onChange} name="password" id="password"/>
 
           <span>
@@ -74,11 +59,11 @@ const Login = (props) => {
             </svg>
           </span>
         </div>
-         <button class="submit" type="submit">
+         <button className="submit" type="submit">
         Sign in
       </button>
 
-      <p class="signup-link">
+      <p className="signup-link">
         No account?
         <Link to="/signup">Sign up</Link>
       </p>

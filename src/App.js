@@ -1,46 +1,58 @@
-
 import './App.css';
 import About from './components/About';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import {useState} from "react";
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
+    BrowserRouter as Router,
+    Routes,
+    Route
 } from "react-router-dom";
 import NoteState from './context/notes/NoteState';
-import {Alert} from './components/Alert';
+import Alert from './components/Alert';
 
 
 function App() {
-  
-  return (
-   <>
-   <NoteState>
+    const [alert, setAlert] = useState(null);
 
-  <Router>
-    <Navbar/>
-    {/* <Alert message="Note Added" /> */}
-    <Alert message="Note Added"/>
-    <Routes>
-      
-    <Route exact  path="/" element={<Home />} />
-    <Route  exact path="/about" element={<About/>} />
-    <Route exact  path="/login" element={<Login />} />
-    <Route exact  path="/signup" element={<Signup />} />
-    </Routes>
- 
+    const showAlert = (message, type) => {
+        setAlert({
+            msg: message,
+            type: type
+        })
+        setTimeout(() => {
+            setAlert(null);
 
-  
-  </Router>
+        }, 3000)
 
-   </NoteState>
-   
-   </>
-  );
+    }
+
+    return (
+        <>
+            <NoteState>
+
+                <Router>
+                    <Navbar/>
+
+                    <Alert alert={alert}/>
+                    <Routes>
+
+                        <Route exact path="/home" element={<Home showAlert={showAlert}/>}/>
+                        <Route exact path="/about" element={<About/>}/>
+                        <Route exact path="/" element={<Login showAlert={showAlert}/>}/>
+                        <Route exact path="/login" element={<Login showAlert={showAlert}/>}/>
+                        <Route exact path="/signup" element={<Signup showAlert={showAlert}/>}/>
+                    </Routes>
+
+
+                </Router>
+
+            </NoteState>
+
+        </>
+    );
 }
 
 export default App;

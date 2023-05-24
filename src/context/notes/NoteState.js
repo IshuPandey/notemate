@@ -16,7 +16,7 @@ const getNote = async (id, title, description, tag) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1OTAzZDQ5NWU4NmM4ZGEzZDg5NDE1In0sImlhdCI6MTY4MzcwNTgyNn0.AtdC110yzlkfTvuCFM92nsuuo34HpoObcX3L0v0J0-Y'
+                'auth-token': localStorage.getItem('token')
             },
         });
         const json=await response.json()
@@ -43,8 +43,7 @@ const getNote = async (id, title, description, tag) => {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
-                  'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1OTAzZDQ5NWU4NmM4ZGEzZDg5NDE1In0sImlhdCI6MTY4MzcwNTgyNn0.AtdC110yzlkfTvuCFM92nsuuo34HpoObcX3L0v0J0-Y'
-              },
+                  'auth-token': localStorage.getItem('token')              },
               body: JSON.stringify({title,description,tag})
           });
       
@@ -67,8 +66,7 @@ const getNote = async (id, title, description, tag) => {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1OTAzZDQ5NWU4NmM4ZGEzZDg5NDE1In0sImlhdCI6MTY4MzcwNTgyNn0.AtdC110yzlkfTvuCFM92nsuuo34HpoObcX3L0v0J0-Y'
-                },
+                    'auth-token': localStorage.getItem('token')                },
                
             });
         console.log("Deleting the note with id" + id);
@@ -87,8 +85,7 @@ const getNote = async (id, title, description, tag) => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1OTAzZDQ5NWU4NmM4ZGEzZDg5NDE1In0sImlhdCI6MTY4MzcwNTgyNn0.AtdC110yzlkfTvuCFM92nsuuo34HpoObcX3L0v0J0-Y'
-                },
+                    'auth-token': localStorage.getItem('token')                },
                 body: JSON.stringify({title,description,tag})
             });
         const json =await  response.json();

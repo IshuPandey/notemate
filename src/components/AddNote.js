@@ -3,7 +3,7 @@ import NoteContext from "../context/notes/NoteContext"
 import '../App.css'
 
 
-const AddNote = () => {
+const AddNote = (props) => {
     
 
     
@@ -16,6 +16,7 @@ const AddNote = () => {
         e.preventDefault();
         addNote(note.title, note.description, note.tag);
         setNote({title: "", description: "", tag: ""})
+        props.showAlert("Notes Added Successfully","success")
         
     }
 

@@ -27,7 +27,8 @@ const NoteItem = (props) => {
     
     <p class="text-body">{note.description}</p>
     <button class="card-button">
-    <i className="far fa-trash-alt mx-2"id='i1' onClick={()=>{deleteNote(note._id)}}></i>
+    <i className="far fa-trash-alt mx-2"id='i1' onClick={()=>{deleteNote(note._id)
+    props.showAlert("Note Deleted","success")}}></i>
              <i className="far fa-edit mx-2" id='i2'  onClick={()=>{updateNote(note)}}></i> </button>
   </div>
   
